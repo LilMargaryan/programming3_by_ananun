@@ -12,10 +12,10 @@ module.exports = class Gishatich extends LiveForm{
         this.index = 3;
     }
     
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-      return super.yntrelVandak(ch);
-   }
+//     yntrelVandak(ch) {
+//         this.stanalNorKordinatner();
+//       return super.yntrelVandak(ch);
+//    }
 
     sharjvel() {
         this.stanalNorKordinatner();

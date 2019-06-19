@@ -15,10 +15,6 @@ module.exports = class GrassEater extends LiveForm {
     
 
 
-   yntrelVandak(ch) {
-       this.stanalNorKordinatner();
-       return super.yntrelVandak(ch);
-   }
     sharjvel() {
         this.stanalNorKordinatner();
         var datarkvandakner = this.yntrelVandak(0);
@@ -64,11 +60,12 @@ module.exports = class GrassEater extends LiveForm {
         grassEaterHashiv++;
         var NorVandak = random(this.yntrelVandak(0));
         if (NorVandak && this.energy >= this.MAX_energy) {
-            var norXotaker = new Xotaker(NorVandak[0], NorVandak[1]);
+            var norXotaker = new GrassEater(NorVandak[0], NorVandak[1]);
             grassEaterArr.push(norXotaker);
             matrix[NorVandak[1]][NorVandak[0]] = 2;
             this.energy = this.MIN_energy;
         }
+       
     }
     mahanal() {
 
@@ -81,3 +78,7 @@ module.exports = class GrassEater extends LiveForm {
         }
     }
 }
+    
+
+
+    
