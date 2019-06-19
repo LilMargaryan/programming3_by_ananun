@@ -137,16 +137,15 @@ function game() {
     if (grassEaterArr[0] !== undefined) {
         for (var i in grassEaterArr) {
            
-            grassEaterArr[i].bazmanal();
-            grassEaterArr[i].utel();
-            grassEaterArr[i].mahanal();
+            grassEaterArr[i].eat();
+            // grassEaterArr[i].utel();
+            // grassEaterArr[i].mahanal();
         }
     }
     if (gishatichArr[0] !== undefined) {
         for (var i in gishatichArr) {
-            gishatichArr[i].bazmanal();
-            gishatichArr[i].utel();
-            gishatichArr[i].mahanal();
+            gishatichArr[i].eat();
+            
           
         }
     }
