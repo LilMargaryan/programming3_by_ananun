@@ -16,6 +16,7 @@ module.exports =class Balansapahpan extends LiveForm{
         var norvandak = random(datarkvandakner);
         if (norvandak) {
             matrix[this.y][this.x] = 3;
+            gishatichHashiv++;
             var norGishatich = new Gishatich(this.x, this.y);
             gishatichArr.push(norGishatich);
             matrix[norvandak[1]][norvandak[0]] = 6;

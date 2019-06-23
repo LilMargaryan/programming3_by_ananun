@@ -23,6 +23,7 @@ grassEaterHashiv = 0;
 gishatichArr = [];
 fireArr=[];
 fireDur = 0;
+gishatichHashiv =0;
 //! Setting global arrays  -- END
 
 
@@ -114,6 +115,7 @@ function creatingObjects() {
             if (matrix[y][x] == 3) {
                 var gishatich = new Gishatich(x, y);
                 gishatichArr.push(gishatich);
+                gishatichHashiv++;
 
             }
             if (matrix[y][x] == 4) {
@@ -173,18 +175,7 @@ function end(){
     };
 }
 creatingObjects();
-function createFire() {
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-           
-            if (matrix[y][x] == 7) {
-                var fr = new Fire(x, y);
-                fireArr.push(fr);
 
-            }
-        }
-    }
-}
 
 
 function game() {
@@ -222,13 +213,7 @@ function game() {
         for (var i in BalansapahpanArr) {
             BalansapahpanArr[i].sharjvel();
         }}
-        for (var f in fireArr) {
-            if(++fireDur >= 10)
-            {
-                fireArr[f].taracvel();
-                fireDur = 0;
-            }   
-        }
+       
     
 
     
@@ -238,14 +223,15 @@ function game() {
     let sendData = {
         matrix: matrix,
         grassCounter: grassHashiv,
-        grassEaterCounter: grassEaterHashiv
+        grassEaterCounter: grassEaterHashiv,
+        gishatichcounter: gishatichHashiv,
+        exanak:exanak
     }
-
+  
     //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
-
+   
 
 }
-
 
 setInterval(game,300)

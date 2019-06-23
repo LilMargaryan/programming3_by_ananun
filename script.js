@@ -12,24 +12,26 @@
 
 // var Fire = require("./modules/Fire.js");
 //- Using an anonymous function:
-document.getElementById("clickMe").onclick = function () {  
-    for (var y = 0; y < matrix.length; y++) {
-    for (var x = 0; x < matrix[y].length; x++) {
+// document.getElementById("clickMe").onclick = function () {  
+//     for (var y = 0; y < matrix.length; y++) {
+//     for (var x = 0; x < matrix[y].length; x++) {
        
      
-            var fr = new Fire(x, y);
-            fireArr.push(fr);
+//             var fr = new Fire(x, y);
+//             fireArr.push(fr);
 
         
-    }
-} };
+//     }
+// } };
 
 guyn = "#006600";
-var count = 0;
+count = 0;
+let exanak;
 var intervalObject = setInterval(function () {
     count++;
     if (count < 10) {
         guyn = "#006600";
+        exanak = "garun";
     }
     if (count >= 10 && count < 20) {
         guyn = "#009933";
@@ -49,22 +51,22 @@ weather = setInterval(function () {
    
     if (count < 10) {
        
- var text = document.createTextNode("Summer");
+ var text = document.createTextNode("Spring");
  document.getElementById('p').innerHTML = '';
  paragraph.appendChild(text);
     }
     if (count >= 10 && count < 20) {
-        var text = document.createTextNode("Autumn");
+        var text = document.createTextNode("Summer");
         document.getElementById('p').innerHTML = '';
  paragraph.appendChild(text);
     }
   if (count >= 20 && count < 30) {
-        var text = document.createTextNode("Winter");
+        var text = document.createTextNode("Autumn");
         document.getElementById('p').innerHTML = '';
  paragraph.appendChild(text);
     }
     else if (count >= 30 && count < 40) {
-        var text = document.createTextNode("Spring");
+        var text = document.createTextNode("Winter");
         document.getElementById('p').innerHTML = '';
         paragraph.appendChild(text);
     }
@@ -74,7 +76,8 @@ weather = setInterval(function () {
    
 }, 10000);
 
-
+socket.on("krak", createFire);
+ 
 
 function setup() {
 
@@ -90,9 +93,17 @@ function setup() {
     //! Getting DOM objects (HTML elements)
     let grassCountElement = document.getElementById('grassCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
+    let GishatichCountElement = document.getElementById('gishatichcounter');
+    let clickme = document.getElementById('clickMe');
+
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
+    clickme.addEventListener('click',function(){
+        alert('dggdd')
+    })
+
+    
     socket.on("data", drawCreatures);
     function bodyClick(evt) {
         console.log(evt.pageX, evt.pageY);
@@ -104,9 +115,12 @@ function setup() {
         matrix = data.matrix;
         grassCountElement.innerText = data.grassCounter;
         grassEaterCountElement.innerText = data.grassEaterCounter;
+        GishatichCountElement.innerText = data.gishatichcounter;
         //! Every time it creates new Canvas woth new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
-
+        function createFire() {
+            alert("qwertyu")
+        }
 
         //! clearing background by setting it to new grey color
         // background('#acacac');
