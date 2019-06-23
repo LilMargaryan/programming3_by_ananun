@@ -5,6 +5,7 @@ var GrassEater = require("./modules/GrassEater.js");
 var Bnapahpan = require("./modules/Bnapahpan.js");
 var Gishatich = require("./modules/Gishatich.js");
 var Kendanapahpan = require("./modules/Kendanapahpan.js");
+var Fire = require("./modules/Fire.js");
 var Balansapahpan = require("./modules/Balansapahpan.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
@@ -20,13 +21,15 @@ matrix = [];
 grassHashiv = 0;
 grassEaterHashiv = 0;
 gishatichArr = [];
+fireArr=[];
+fireDur = 0;
 //! Setting global arrays  -- END
 
 
 
 
 //! Creating MATRIX -- START
-function matrixGenerator(matrixSize, grass, grassEater, gishatich, bnapahpan, kendanapahpan, balansapahpan) {
+function matrixGenerator(matrixSize, grass, grassEater, gishatich, bnapahpan, kendanapahpan, balansapahpan,fr) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -63,8 +66,13 @@ function matrixGenerator(matrixSize, grass, grassEater, gishatich, bnapahpan, ke
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 6;
     }
+    for (let i = 0; i < fr; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 7;
+    }
 }
-matrixGenerator(50, 1, 1);
+matrixGenerator(30, 1, 1);
 //! Creating MATRIX -- END
 
 
@@ -90,7 +98,7 @@ matrix[7][17] = 4;
 matrix[3][3] = 5;
 matrix[23][23] = 5;
 matrix[22][22] = 6;
-
+matrix[29][29] = 7;
 function creatingObjects() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -123,10 +131,61 @@ function creatingObjects() {
                 BalansapahpanArr.push(balansapahpan);
 
             }
+            // if (matrix[y][x] == 7) {
+            //     var fr = new Fire(x, y);
+            //     fireArr.push(fr);
+
+            // }
         }
     }
 }
+function end(){
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] == 1) {
+                fill(guyn);
+                rect(j * side, i * side, side, side);
+            } else if (matrix[i][j] == 2) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            } else if (matrix[i][j] == 0) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            } else if (matrix[i][j] == 3) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            } else if (matrix[i][j] == 4) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            } else if (matrix[i][j] == 5) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            }
+            else if (matrix[i][j] == 6) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            }
+            else if (matrix[i][j] == 7) {
+                fill('#acacac');
+                rect(j * side, i * side, side, side);
+            }
+        }
+    };
+}
 creatingObjects();
+function createFire() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+           
+            if (matrix[y][x] == 7) {
+                var fr = new Fire(x, y);
+                fireArr.push(fr);
+
+            }
+        }
+    }
+}
+
 
 function game() {
     if (grassArr[0] !== undefined) {
@@ -162,10 +221,17 @@ function game() {
     if (gishatichArr.length <= 1) {
         for (var i in BalansapahpanArr) {
             BalansapahpanArr[i].sharjvel();
+        }}
+        for (var f in fireArr) {
+            if(++fireDur >= 10)
+            {
+                fireArr[f].taracvel();
+                fireDur = 0;
+            }   
         }
-    }
+    
 
-
+    
 
 
     //! Object to send
@@ -182,5 +248,4 @@ function game() {
 }
 
 
-
-setInterval(game, 300)
+setInterval(game,300)
